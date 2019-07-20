@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html manifest="maxgame.v7.manifest">
+<html manifest="maxgame.v8.manifest">
 <head>
 <title>Max's Game</title>
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<script src="jquery-3.1.1.min.js"></script>
+<script src="assets/js/jquery-3.1.1.min.js"></script>
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="viewport" content="user-scalable=no, width=device-width" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -13,31 +13,67 @@ document.ontouchmove = function(event){
     event.preventDefault();
 }
 
+var prev_object_index = -1;
+
+getRandomColor =function(){
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 trigger_next = function() {
 	objects = [
-		{'audio':'dad.m4a','color':'gray','img':'dad.jpg','name':'Dad'},
-		{'audio':'mom.m4a','color':'green','img':'mom.jpg','name':'Mom'},
-		{'audio':'max.m4a','color':'blue','img':'max.jpg','name':'Max'},
-		{'audio':'gram.m4a','color':'orange','img':'gram.jpg','name':'Gram'},
-		{'audio':'grandpa.m4a','color':'purple','img':'grandpa.jpg','name':'Grandpa'},
-		{'audio':'unclemo.m4a','color':'pink','img':'unclemo.jpg','name':'Uncle Mo'},
-		{'audio':'grandma.m4a','color':'yellow','img':'grandma.jpg','name':'Grandma'},
-		{'audio':'grandpa2.m4a','color':'brown','img':'grandpa2.jpg','name':'Grandpa'},
+        {'filename':'adelyn','color':'gray','name':'Adelyn'},
+        {'filename':'aj','color':'gray','name':'AJ'},
+        {'filename':'andrew','color':'gray','name':'Uncle Andrew'},
+        {'filename':'auntbarbie','color':'gray','name':'Aunt Barbie'},
+        {'filename':'auntheidi','color':'gray','name':'Aunt Heidi'},
+        {'filename':'auntwendy','color':'gray','name':'Aunt Wendy'},
+        {'filename':'becky','color':'gray','name':'Aunt Becky'},
+        {'filename':'dad','color':'gray','name':'Dad'},
+        {'filename':'elena','color':'gray','name':'Elena'},
+        {'filename':'ellie','color':'gray','name':'Ellie'},
+        {'filename':'gram','color':'gray','name':'Gram'},
+        {'filename':'grandma','color':'gray','name':'Grandma'},
+        {'filename':'grandmother','color':'gray','name':'Grandmother'},
+        {'filename':'grandpa','color':'gray','name':'Grandpa Cortesi'},
+        {'filename':'grandpa2','color':'gray','name':'Grandpa Dancesia'},
+        {'filename':'henry','color':'gray','name':'Henry'},
+        {'filename':'jamie','color':'gray','name':'Jamie'},
+        {'filename':'katrina','color':'gray','name':'Katrina'},
+        {'filename':'kristamarie','color':'gray','name':'Kristamarie'},
+        {'filename':'max','color':'gray','name':'Maximus'},
+        {'filename':'mom','color':'gray','name':'Mom'},
+        {'filename':'nick','color':'gray','name':'Nick'},
+        {'filename':'rachel','color':'gray','name':'Aunt Rachel'},
+        {'filename':'stephanie','color':'gray','name':'Stephanie'},
+        {'filename':'tony','color':'gray','name':'Tony'},
+        {'filename':'travis','color':'gray','name':'Travis'},
+        {'filename':'tyler','color':'gray','name':'Uncle Tyler'},
+        {'filename':'uncledavid','color':'gray','name':'Uncle David'},
+        {'filename':'uncleed','color':'gray','name':'Uncle Ed'},
+        {'filename':'unclemo','color':'gray','name':'Uncle Mo'},
+        {'filename':'unclerandy','color':'gray','name':'Uncle Randy'},
 	];
 	height = $(window).height()-200;
-	width = $(window).width()-200;
-	object_index = Math.floor((Math.random() * objects.length));
+    width = $(window).width()-200;
+    do {
+        object_index = Math.floor((Math.random() * objects.length));
+    } while (object_index === prev_object_index);
+    prev_object_index = object_index;
   	dot_y = Math.floor((Math.random() * height) + 1);
 	dot_x = Math.floor((Math.random() * width) + 1);
 
-	//$( "#dot" ).animate({"left":"+="+(dot_x -$('#dot').position().left),"top":"+="+(dot_y -$('#dot').position().top)}, "slow" );
-
-	$('#dot').css({'margin-top':dot_y+'px','margin-left':dot_x+'px'});
-	$('#img').css({'background-image':'url('+objects[object_index].img+')'});
-	$('#name').text(objects[object_index].name);
-	var audio = new Audio(objects[object_index].audio);
+    $('#dot').css({'display':'none','margin-top':dot_y+'px','margin-left':dot_x+'px'});
+	$('#img').css({'background-image':'url(assets/people/images/'+objects[object_index].filename+'.jpg)'});
+    $('#name').text(objects[object_index].name);
+    $('#dot').css({'display':'block'});
+	var audio = new Audio("assets/people/audio/"+objects[object_index].filename+".m4a");
 	audio.play();
-	$('body').css({'background-color':objects[object_index].color});
+	$('body').css({'background-color':getRandomColor()});
 }
 
 $( document ).ready(function() {
@@ -56,7 +92,7 @@ $( document ).ready(function() {
 	#img {
 		width:100%;
 		height:100%;
-		background-color:red;
+		background-color:black;
 		border-radius:200px;
 		background-size: 200px 200px;
     	background-repeat: no-repeat;
