@@ -1,11 +1,7 @@
 CACHE MAINFEST
 
 README.md
-assets
-assets/js
 assets/js/jquery-3.1.1.min.js
-assets/people
-assets/people/images
 assets/people/images/grandmother.jpg
 assets/people/images/auntbarbie.jpg
 assets/people/images/andrew.jpg
@@ -37,7 +33,6 @@ assets/people/images/grandpa.jpg
 assets/people/images/grandpa2.jpg
 assets/people/images/auntwendy.jpg
 assets/people/images/stephanie.jpg
-assets/people/audio
 assets/people/audio/elena.m4a
 assets/people/audio/uncledavid.m4a
 assets/people/audio/gram.m4a
@@ -73,4 +68,3 @@ assets/people/audio/dad.m4a
 assets/people/audio/adelyn.m4a
 assets/people/audio/henry.m4a
 assets/people/audio/clapping.m4a
-index.html
