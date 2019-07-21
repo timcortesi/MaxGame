@@ -20,19 +20,19 @@ main_template = `
             <div class="col-xs-12 header" style="color:{{contrast_color}}">Where Is {{name}}?</div>
         </div>        
         <div class="row">
-            <div class="col-xs-6 cell" data-filename="{{choices.0.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.0.filename}}.jpg);border-color:{{contrast_color}};"></div>
+            <div class="col-xs-6 cell">
+                <div class="face" data-filename="{{choices.0.filename}}" style="background-image:url(assets/people/images/{{choices.0.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
-            <div class="col-xs-6 cell" data-filename="{{choices.1.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.1.filename}}.jpg);border-color:{{contrast_color}};"></div>
+            <div class="col-xs-6 cell">
+                <div class="face" data-filename="{{choices.1.filename}}" style="background-image:url(assets/people/images/{{choices.1.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6 cell" data-filename="{{choices.2.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.2.filename}}.jpg);border-color:{{contrast_color}};"></div>
+            <div class="col-xs-6 cell">
+                <div class="face" data-filename="{{choices.2.filename}}" style="background-image:url(assets/people/images/{{choices.2.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
-            <div class="col-xs-6 cell" data-filename="{{choices.3.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.3.filename}}.jpg);border-color:{{contrast_color}};"></div>
+            <div class="col-xs-6 cell">
+                <div class="face" data-filename="{{choices.3.filename}}" style="background-image:url(assets/people/images/{{choices.3.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
         </div>
     </div>
@@ -156,12 +156,12 @@ check_state = function(e) {
 $( document ).ready(function() {
     update('begin');
     if ('ontouchstart' in document.documentElement) {
-        $('body').on('touchstart','.cell',check_state);
+        $('body').on('touchstart','.face',check_state);
         $('body').on('touchstart','#begin',function() {
             new_state();
         });
     } else {
-        $('body').on('mousedown','.cell',check_state);
+        $('body').on('mousedown','.face',check_state);
         $('body').on('mousedown','#begin',function() {
             new_state();
         });
