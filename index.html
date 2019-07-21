@@ -15,24 +15,24 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <script>
 main_template = `
-    <div class="container-fluid" style="background-color:{{background_color}}">
+    <div class="container-fluid" style="background-color:{{background_color}};">
         <div class="row">
-            <div class="col-xs-12 header">Where Is {{name}}?</div>
+            <div class="col-xs-12 header" style="color:{{contrast_color}}">Where Is {{name}}?</div>
         </div>        
         <div class="row">
             <div class="col-xs-6 cell" data-filename="{{choices.0.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.0.filename}}.jpg)"></div>
+                <div class="face" style="background-image:url(assets/people/images/{{choices.0.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
             <div class="col-xs-6 cell" data-filename="{{choices.1.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.1.filename}}.jpg)"></div>
+                <div class="face" style="background-image:url(assets/people/images/{{choices.1.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6 cell" data-filename="{{choices.2.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.2.filename}}.jpg)"></div>
+                <div class="face" style="background-image:url(assets/people/images/{{choices.2.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
             <div class="col-xs-6 cell" data-filename="{{choices.3.filename}}">
-                <div class="face" style="background-image:url(assets/people/images/{{choices.3.filename}}.jpg)"></div>
+                <div class="face" style="background-image:url(assets/people/images/{{choices.3.filename}}.jpg);border-color:{{contrast_color}};"></div>
             </div>
         </div>
     </div>
@@ -48,13 +48,20 @@ var prev_object_index = -1;
 current_state = {
     "name" : "Dad",
     "filename": "dad",
-    "background_color":"f00",
+    "background_color":"#f00",
+    "contrast_color":"#000",
     "choices": [
         {"filename":"dad"},
         {"filename":"dad"},
         {"filename":"dad"},
         {"filename":"dad"}
     ]
+}
+
+getContrastColor = function(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    var contrast = (((parseInt(result[1], 16) * 299) + (parseInt(result[2], 16)* 587) + (parseInt(result[3], 16)*114))/1000)
+    return (contrast > 100);
 }
 
 getRandomColor =function(){
@@ -116,6 +123,7 @@ new_state = function() {
     current_state.name = people_obj[objects_index].name;
     current_state.filename = people_obj[objects_index].filename;
     current_state.background_color = getRandomColor();
+    current_state.contrast_color = getContrastColor(current_state.background_color)?'#000':'#fff';
     update();
     audio.addEventListener("ended", function(){
         var audio = new Audio("assets/people/audio/"+current_state.filename+".m4a");
@@ -138,8 +146,10 @@ check_state = function(e) {
 }
 
 $( document ).ready(function() {
-    new_state();
-    $('body').on('touchstart mousedown','.cell',check_state);
+    $('body').on('touchstart mousedown','#begin',function() {
+        new_state();
+        $('body').on('touchstart mousedown','.cell',check_state);
+    });
 });
 
 </script>
@@ -169,6 +179,10 @@ $( document ).ready(function() {
 </style>
 </head>
 <body>
-
+    <div style="text-align:center;height:100vh;background-color:#000">
+        <div class="btn btn-lg btn-primary" id="begin" style="top:40vh;position:relative;font-size:10vmin;">
+            Click to Begin!
+        </div>   
+    </div> 
 </body>
 </html>
