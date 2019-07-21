@@ -155,10 +155,17 @@ check_state = function(e) {
 
 $( document ).ready(function() {
     update('begin');
-    $('body').on('touchstart mousedown','.cell',check_state);
-    $('body').on('touchstart mousedown','#begin',function() {
-        new_state();
-    });
+    if ('ontouchstart' in document.documentElement) {
+        $('body').on('touchstart','.cell',check_state);
+        $('body').on('touchstart','#begin',function() {
+            new_state();
+        });
+    } else {
+        $('body').on('mousedown','.cell',check_state);
+        $('body').on('mousedown','#begin',function() {
+            new_state();
+        });
+    }
 });
 
 </script>
