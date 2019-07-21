@@ -112,8 +112,8 @@ people_obj = [
 ];
 
 new_state = function() {
-    var audio = new Audio("assets/audio/where_is.m4a");
-    audio.play();
+    // var audio = new Audio("assets/audio/where_is.m4a");
+    // audio.play();
     for(var i=0;i<4;i++) {
         var objects_index = Math.floor((Math.random() * people_obj.length));
         current_state.choices[i].filename = people_obj[objects_index].filename;
@@ -125,19 +125,19 @@ new_state = function() {
     current_state.background_color = getRandomColor();
     current_state.contrast_color = getContrastColor(current_state.background_color)?'#000':'#fff';
     update();
-    audio.addEventListener("ended", function(){
+    // audio.addEventListener("ended", function(){
         var audio = new Audio("assets/people/audio/"+current_state.filename+".m4a");
         audio.play();
-    });
+    // });
 }
 
 check_state = function(e) {
     if (e.currentTarget.dataset.filename === current_state.filename) {
-        var audio = new Audio("assets/audio/good_job.m4a");
-        audio.play();
-        audio.addEventListener("ended", function(){
+        // var audio = new Audio("assets/audio/good_job.m4a");
+        // audio.play();
+        // audio.addEventListener("ended", function(){
             new_state();
-        });
+        // });
 
     } else {
         var audio = new Audio("assets/audio/try_again.m4a");
