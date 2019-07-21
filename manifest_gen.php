@@ -12,8 +12,7 @@ $manifest = [
     ],
     "start_url"=> "index.html",
     "background_color"=> "#fff",
-    "display"=> "fullscreen",
-    "orientation"=> "landscape",
+    "display"=> "standalone",
     "scope"=> "/",
 ];
 file_put_contents('manifest.json',json_encode($manifest));
